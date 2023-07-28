@@ -4,11 +4,20 @@ class Blob {
     this.r = r;
 
     this.update = function() {
-      let vel = createVector(mouseX, mouseY);
-      vel.sub(this.pos);
-      vel.setMag(3);
+      let vel = createVector(mouseX-width/2, mouseY-height/2);
+      vel.setMag(3); 
       this.pos.add(vel);
 
+    }
+
+    this.eats = function(other) {
+      let d = p5.Vector.dist(this.pos, other.pos);
+      if (d < this.r + other.r) { 
+        this.r += other.r * 0.2;
+        return true;
+      } else {
+        return false;
+      }
     }
 
     this.show = function() {
